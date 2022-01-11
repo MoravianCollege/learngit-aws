@@ -9,7 +9,7 @@ def create_repo():
     g = Github(load_token())
 
     org = g.get_organization('moco-learn-git')
-    repo = org.create_repo('temp2', 'temp repo')
+    repo = org.create_repo('temp', 'temp repo')
 
     return {
         'statusCode': 200,
