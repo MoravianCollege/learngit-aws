@@ -3,13 +3,19 @@ from botocore.exceptions import ClientError
 import json
 from github import Github, GithubException
 from helpers import load_token
+import wonderwords
 
 
 def create_repo():
     g = Github(load_token())
 
+    r = wonderwords.RandomWord()
+    noun = r.word(include_parts_of_speech=['noun'])
+    adjective = r.word(include_parts_of_speech=['adjective'])
+    name = adjective + '-' + noun
+
     org = g.get_organization('moco-learn-git')
-    repo = org.create_repo('temp', 'temp repo')
+    repo = org.create_repo(name, 'temp repo')
 
     return {
         'statusCode': 200,

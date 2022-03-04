@@ -1,3 +1,4 @@
 pygithub
 GitPython
 boto3
+wonderwords
