@@ -5,5 +5,6 @@ COPY requirements.txt ${LAMBDA_TASK_ROOT}
 RUN pip3 install -r requirements.txt
 COPY create_conflict.py ${LAMBDA_TASK_ROOT}
 COPY helpers.py ${LAMBDA_TASK_ROOT}
+COPY README_conflict_version.md ${LAMBA_TASK_ROOT}
 
 CMD [ "create_conflict.lambda_handler"]
