@@ -20,7 +20,7 @@ def create_repo():
     repo_name = adjective + '-' + noun
 
     org = g.get_organization('moco-learn-git')
-    repo = org.create_repo(repo_name, 'temp repo')
+    repo = org.create_repo(repo_name, 'Practice the Github Workflow')
 
     t = tempfile.TemporaryDirectory()
     repo_dir = os.path.join(t.name, repo_name)
