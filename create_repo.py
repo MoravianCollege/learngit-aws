@@ -2,6 +2,7 @@
 from botocore.exceptions import ClientError
 import json
 from github import Github, GithubException
+from git import Actor
 from helpers import load_token
 import wonderwords
 import tempfile
@@ -36,9 +37,11 @@ def create_repo():
     with origin.config_writer as cw:
         cw.set("url", "https://{}@github.com/moco-learn-git/{}.git".format(token, repo_name))
 
+    author = Actor("Ben Coleman", "coleman@cs.moravian.edu")
+
     index = r.index
     index.add(['README.md'])
-    index.commit('initial commit')
+    index.commit('Change to an enumerated list', author=author, committer=author)
     r.remote('origin').push('main')
 
     return {
