@@ -1,8 +1,10 @@
 FROM public.ecr.aws/lambda/python:3.8
 
+RUN yum install -y git
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 RUN pip3 install -r requirements.txt
 COPY create_repo.py ${LAMBDA_TASK_ROOT}
 COPY helpers.py ${LAMBDA_TASK_ROOT}
+COPY README_start_version.md ${LAMBA_TASK_ROOT}
 
 CMD [ "create_repo.lambda_handler"]
