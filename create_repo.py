@@ -15,12 +15,11 @@ def create_repo():
     token = load_token()
     g = Github(token)
 
-    r = wonderwords.RandomWord()
-    noun = r.word(include_parts_of_speech=['noun'])
-    adjective = r.word(include_parts_of_speech=['adjective'])
-    repo_name = adjective + '-' + noun
-
     org = g.get_organization('moco-learn-git')
+
+    repo_name = create_repo_name()
+    while repo_name in org.get_repos():
+        repo_name = create_repo_name()
     repo = org.create_repo(repo_name, 'Practice the Github Workflow')
 
     t = tempfile.TemporaryDirectory()
@@ -50,6 +49,12 @@ def create_repo():
                             'repo_url': 'https://github.com/moco-learn-git/{}.git'.format(repo_name)}),
     }
 
+def create_repo_name():
+    r = wonderwords.RandomWord()
+    noun = r.word(include_parts_of_speech=['noun'])
+    adjective = r.word(include_parts_of_speech=['adjective'])
+    repo_name = adjective + '-' + noun
+    return repo_name
 
 def lambda_handler(event, context):
 
